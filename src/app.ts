@@ -9,6 +9,8 @@ const main = async () => {
     const tareasDB = readData();
     if(tareasDB){
         //Convertir Tareas A a un objeto que se pueda leer
+        tareas.cargarTareas(tareasDB);
+        //const tareasCargadas : any = tareas.cargarTareas(tareasDB);
     }
     let opt: string = '';
     do {
@@ -24,12 +26,21 @@ const main = async () => {
                 //console.log(tareas.listado, "list", tareas.list);
                 break;
             case '2':
-                console.log(tareasDB);
+                tareas.listadoCompleto();
+                //console.log(tareas.cargarTareas(tareasDB));
+
                 /* console.log(tareas.listado);
                 console.log('==========Clase===========');
                 console.log(tareas.list);
                 console.log('==========Getter==========');
                 console.log(tareas.listToDos); */
+                break;
+            case '3':
+                tareas.listadoPendientesCompletadas(true);
+                break;
+            case '4':
+                tareas.listadoPendientesCompletadas(false);
+                break;
 
 
         }
