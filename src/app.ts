@@ -1,10 +1,18 @@
+import { saveData, readData } from "./helpers/guardar-data";
 import { leerInput, inquirerMenu, pausa } from "./helpers/inquier";
 import { Tareas } from "./models/Tareas";
 
 console.clear();
 const main = async () => {
 
-    const tareas = new Tareas;
+    const tareas = new Tareas; //instancia de tareas
+    const tareasDB = await readData();
+    try {
+        tareas.cargarTareas(tareasDB);
+    } catch (error) {
+        console.log(error);
+    }
+   
     let opt: string = '';
     do {
         opt = await inquirerMenu();
@@ -19,14 +27,25 @@ const main = async () => {
                 //console.log(tareas.listado, "list", tareas.list);
                 break;
             case '2':
-                console.log(tareas.listado);
+                tareas.listadoCompleto();
+                //console.log(tareas.cargarTareas(tareasDB));
+
+                /* console.log(tareas.listado);
                 console.log('==========Clase===========');
                 console.log(tareas.list);
                 console.log('==========Getter==========');
-                console.log(tareas.listToDos);
+                console.log(tareas.listToDos); */
+                break;
+            case '3':
+                tareas.listadoPendientesCompletadas(true);
+                break;
+            case '4':
+                tareas.listadoPendientesCompletadas(false);
+                break;
 
 
         }
+        saveData(tareas.list);
         await pausa();
 
     } while (opt !== '0');
