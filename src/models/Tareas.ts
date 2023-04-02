@@ -23,6 +23,11 @@ export class Tareas {
         return lista;
     }
 
+    borrarTarea(id:string){
+        const tarea = this.list.findIndex(item => (item.id === id));
+        this.list.splice(tarea, 1);
+    }
+
     createTarea(des:string = ''){
         const tarea = new Tarea(des);
         this.listado[tarea.id] = tarea;
