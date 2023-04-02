@@ -6,12 +6,13 @@ console.clear();
 const main = async () => {
 
     const tareas = new Tareas; //instancia de tareas
-    const tareasDB = readData();
-    if(tareasDB){
-        //Convertir Tareas A a un objeto que se pueda leer
+    const tareasDB = await readData();
+    try {
         tareas.cargarTareas(tareasDB);
-        //const tareasCargadas : any = tareas.cargarTareas(tareasDB);
+    } catch (error) {
+        console.log(error);
     }
+   
     let opt: string = '';
     do {
         opt = await inquirerMenu();
