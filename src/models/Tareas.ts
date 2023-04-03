@@ -23,6 +23,11 @@ export class Tareas {
         return lista;
     }
 
+    borrarTarea(id:string){
+        const tarea = this.list.findIndex(item => (item.id === id));
+        this.list.splice(tarea, 1);
+    }
+
     createTarea(des:string = ''){
         const tarea = new Tarea(des);
         this.listado[tarea.id] = tarea;
@@ -64,5 +69,26 @@ export class Tareas {
 
 
         });
+    }
+    toggleCompletadas(ids: any[]){
+        
+        if(ids){
+            this.list.forEach(id => id.completadoEn = 1);
+        }
+        ids.forEach(id =>{
+            const idxCompletados = this.list.findIndex(idTarea  => idTarea.id === id);
+            if(this.list[idxCompletados].completadoEn === 1){
+                this.list[idxCompletados].completadoEn = 0;
+            }else{
+                this.list[idxCompletados].completadoEn = 0;
+            }
+        });
+        
+        /* ids.forEach(id =>{
+            const tarea:any = this.list.findIndex(idTarea => (idTarea.id !== id));
+            console.log(tarea, this.list[tarea].completadoEn, "Indexado");
+            this.list[tarea].completadoEn = 1;
+            
+        }); */
     }
 }
