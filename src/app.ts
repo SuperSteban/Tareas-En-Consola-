@@ -1,5 +1,5 @@
 import { saveData, readData } from "./helpers/guardar-data";
-import { leerInput, inquirerMenu, pausa, listadoBorrar, confirmarAccion } from "./helpers/inquier";
+import { leerInput, inquirerMenu, pausa, listadoBorrar, confirmarAccion, CompletadoCheckList } from "./helpers/inquier";
 import { Tareas } from "./models/Tareas";
 
 console.clear();
@@ -41,6 +41,12 @@ const main = async () => {
                 break;
             case '4':
                 tareas.listadoPendientesCompletadas(false);
+                break;
+            case '5':
+                const ids = await CompletadoCheckList(tareas.list);
+                console.log(ids);
+                const completarTareas = tareas.toggleCompletadas(ids);
+                console.log(completarTareas, "Completar tareas");
                 break;
             case '6':
                 const id = await listadoBorrar(tareas.list);

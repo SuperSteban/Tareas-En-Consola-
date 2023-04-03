@@ -113,7 +113,39 @@ export const listadoBorrar = async (tareas: any = []) => {
         name:  
     } */
 }
+export const CompletadoCheckList = async (tareas: any = []) => {
 
+    const choices = tareas.map((tarea: { description: any; id: any; completadoEn: any }, i: number) => {
+        const indx = i + 1;
+        return {
+            value: tarea.id,
+            name: `${indx} ${tarea.description}`,
+            checked: (tarea.completadoEn === 0 )? true:false,
+
+        }
+    });
+
+    choices.unshift({
+        value: '0',
+        name: '0. Cancelar',
+    })
+    const pregunta = [
+        {
+            type: 'checkbox',
+            name: 'ids',
+            message: 'Seleccione',
+            choices
+        }
+    ]
+    const { ids } = await inquirer.prompt(pregunta);
+
+    return ids;
+
+    /* {
+        value: tareas.id
+        name:  
+    } */
+}
 export const confirmarAccion =  async(mensaje: any) => {
     const question =[
         {

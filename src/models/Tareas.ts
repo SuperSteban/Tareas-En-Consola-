@@ -70,4 +70,25 @@ export class Tareas {
 
         });
     }
+    toggleCompletadas(ids: any[]){
+        
+        if(ids){
+            this.list.forEach(id => id.completadoEn = 1);
+        }
+        ids.forEach(id =>{
+            const idxCompletados = this.list.findIndex(idTarea  => idTarea.id === id);
+            if(this.list[idxCompletados].completadoEn === 1){
+                this.list[idxCompletados].completadoEn = 0;
+            }else{
+                this.list[idxCompletados].completadoEn = 0;
+            }
+        });
+        
+        /* ids.forEach(id =>{
+            const tarea:any = this.list.findIndex(idTarea => (idTarea.id !== id));
+            console.log(tarea, this.list[tarea].completadoEn, "Indexado");
+            this.list[tarea].completadoEn = 1;
+            
+        }); */
+    }
 }
